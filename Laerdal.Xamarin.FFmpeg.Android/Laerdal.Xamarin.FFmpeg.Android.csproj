@@ -69,13 +69,20 @@
         <ProjectGuid>{24AF7AA4-9A85-4662-8204-F3EB9BE67ECF}</ProjectGuid>
         <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
 
+        <ExternalLibraries>-</ExternalLibraries>
+
         <AssemblyName>Laerdal.Xamarin.FFmpeg.Android</AssemblyName>
         <RootNamespace>Laerdal.Xamarin.FFmpeg.Android</RootNamespace>
+
         <PackageId>Laerdal.Xamarin.FFmpeg.Android.$(NugetPackageVariantName)</PackageId>
         <Summary>Xamarin FFmpeg Android $(NugetPackageVariantName)</Summary>
         <Title>Laerdal.Xamarin.FFmpeg.Android.$(NugetPackageVariantName)</Title>
-        <Description>Xamarin wrapper around mobile-ffmpeg for Android</Description>
+
+        <Description>Xamarin wrapper around mobile-ffmpeg for Android. External libraries: $(ExternalLibraries). Based on https://github.com/tanersener/mobile-ffmpeg</Description>
+        <PackageDescription>Xamarin wrapper around mobile-ffmpeg for Android. External libraries: $(ExternalLibraries). Based on https://github.com/tanersener/mobile-ffmpeg</PackageDescription>
+
         <PackageTags>Xamarin;FFmpeg;Android;$(NugetPackageVariantName)</PackageTags>
+
         <PackageProjectUrl>https://github.com/Laerdal/Laerdal.Xamarin.FFmpeg.Android</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Laerdal/Laerdal.Xamarin.FFmpeg.Android.git</RepositoryUrl> 
         <RepositoryType>git</RepositoryType>
