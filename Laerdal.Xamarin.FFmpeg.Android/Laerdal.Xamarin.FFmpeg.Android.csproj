@@ -71,9 +71,9 @@
 
         <ExternalLibraries>-</ExternalLibraries>
 
-        <AssemblyName>Laerdal.Xamarin.FFmpeg.Android</AssemblyName>
         <RootNamespace>Laerdal.Xamarin.FFmpeg.Android</RootNamespace>
 
+        <AssemblyName>Laerdal.Xamarin.FFmpeg.Android.$(NugetPackageVariantName)</AssemblyName>
         <PackageId>Laerdal.Xamarin.FFmpeg.Android.$(NugetPackageVariantName)</PackageId>
         <Summary>Xamarin FFmpeg Android $(NugetPackageVariantName)</Summary>
         <Title>Laerdal.Xamarin.FFmpeg.Android.$(NugetPackageVariantName)</Title>
