@@ -23,6 +23,5 @@
   <attr path="/api/package[@name='com.arthenica.mobileffmpeg']/class[@name='AsyncFFmpegExecuteTask']" name="extends">Java.Lang.Object</attr>
 
   <!-- warning CS0108: 'Abi.Name' hides inherited member 'Enum.Name()'. Use the new keyword if hiding was intended. -->
-  <remove-node path="/api/package[@name='com.arthenica.mobileffmpeg']/class[@name='Abi']/method[contains(@name, 'getName')]" />
-
+  <attr path="/api/package[@name='com.arthenica.mobileffmpeg']/class[@name='Abi']/method[@name='getName']" name="managedName">GetAbiName</attr>
 </metadata>
