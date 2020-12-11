@@ -89,7 +89,7 @@
 
         <PackageVersion>1.0.0</PackageVersion>
 
-        <PackageOutputPath Condition=" '$(PackageOutputPath)' == '' ">../$(AssemblyName).Output</PackageOutputPath>
+        <PackageOutputPath Condition=" '$(PackageOutputPath)' == '' ">../$(RootNamespace).Output</PackageOutputPath>
     </PropertyGroup>
     <ItemGroup>
         <LibraryProjectZip Include="Jars\*.aar" />
