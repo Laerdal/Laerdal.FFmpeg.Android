@@ -147,6 +147,7 @@ echo ""
 
 echo "Copying $package_aar_file to $nuget_project_folder/Jars/mobile-ffmpeg.aar"
 rm -rf $nuget_project_folder/Jars/mobile-ffmpeg.aar
+mkdir -p $nuget_project_folder/Jars/
 cp $package_aar_file $nuget_project_folder/Jars/mobile-ffmpeg.aar
 
 echo ""
