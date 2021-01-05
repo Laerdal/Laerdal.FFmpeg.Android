@@ -349,7 +349,5 @@ healthchecksdb
 MigrationBackup/
 
 Laerdal.Xamarin.FFmpeg.Android/Jars/*.aar
-
 Laerdal.Xamarin.FFmpeg.Android.Output/
 Laerdal.Xamarin.FFmpeg.Android.Source/
-*.info.json
