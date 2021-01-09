@@ -39,7 +39,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
-if [ $clean_output = 1 ]; then
+if [ "$clean_output" = "1" ]; then
     echo ""
     echo "### CLEANING OUTPUT ###"
     echo ""

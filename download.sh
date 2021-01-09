@@ -17,8 +17,10 @@ fi
 
 package_aar_folder="Laerdal.Xamarin.FFmpeg.Android.Source"
 
+# Set version
 github_tag_name=`cat $github_info_file | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//'`
-if [ ! -z "$github_tag_name" ]; then
+github_short_version=`echo "$github_tag_name" | sed 's/.LTS//'`
+if [ -z "$github_short_version" ]; then
     echo "Failed : Could not read Version"
     cat $github_info_file
     exit 1
@@ -35,6 +37,7 @@ echo "github_repo = $github_repo"
 echo "github_release_id = $github_release_id"
 echo "github_info_file = $github_info_file"
 echo "github_tag_name = $github_tag_name"
+echo "github_short_version = $github_short_version"
 echo ""
 echo "package_aar_folder = $package_aar_folder"
 echo "package_aar_file_name_pattern = $package_aar_file_name_pattern"
@@ -46,7 +49,7 @@ echo ""
 mkdir -p $package_aar_folder
 echo "Files matching '$package_aar_file_name_pattern' :"
 cat $github_info_file | grep "browser_download_url.*$package_aar_file_name_pattern" | cut -d : -f 2,3 | tr -d \"
-cat $github_info_file | grep "browser_download_url.*$package_aar_file_name_pattern" | cut -d : -f 2,3 | tr -d \" | wget -q --show-progress -nc -P $package_aar_folder -i -
+cat $github_info_file | grep "browser_download_url.*$package_aar_file_name_pattern" | cut -d : -f 2,3 | tr -d \" | wget -q -nc -P $package_aar_folder -i -
 
 echo ""
 echo "### DONE ###"
