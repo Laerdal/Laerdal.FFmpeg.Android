@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GITHUB INFORMATION
+# find the latest ID here : https://api.github.com/repos/tanersener/mobile-ffmpeg/releases/latest
 github_repo_owner=tanersener
 github_repo=mobile-ffmpeg
 github_release_id=28895129
@@ -15,9 +15,8 @@ if [ ! -f "$github_info_file" ]; then
     curl -s $github_info_file_url > $github_info_file
 fi
 
-package_zip_folder="Laerdal.Xamarin.FFmpeg.iOS.Source"
+package_aar_folder="Laerdal.Xamarin.FFmpeg.Android.Source"
 
-# Set version
 github_tag_name=`cat $github_info_file | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//'`
 if [ ! -z "$github_tag_name" ]; then
     echo "Failed : Could not read Version"
@@ -25,25 +24,34 @@ if [ ! -z "$github_tag_name" ]; then
     exit 1
 fi
 
-# Generates variables
+package_aar_file_name_pattern="mobile-ffmpeg-.*-$github_tag_name.aar"
+
 echo ""
+echo "### INFORMATION ###"
+echo ""
+
 echo "github_repo_owner = $github_repo_owner"
 echo "github_repo = $github_repo"
 echo "github_release_id = $github_release_id"
 echo "github_info_file = $github_info_file"
-echo "package_zip_folder = $package_zip_folder"
 echo "github_tag_name = $github_tag_name"
+echo ""
+echo "package_aar_folder = $package_aar_folder"
+echo "package_aar_file_name_pattern = $package_aar_file_name_pattern"
 
 echo ""
 echo "### DOWNLOAD ALL GITHUB RELEASE FILES ###"
 echo ""
 
-mkdir -p $package_zip_folder
-package_zip_file_name_pattern="mobile-ffmpeg-.*-$github_tag_name-ios-framework.zip"
-echo "Files matching '$package_zip_file_name_pattern' :"
-cat $github_info_file | grep "browser_download_url.*$package_zip_file_name_pattern" | cut -d : -f 2,3 | tr -d \"
-cat $github_info_file | grep "browser_download_url.*$package_zip_file_name_pattern" | cut -d : -f 2,3 | tr -d \" | wget -q --show-progress -nc -P $package_zip_folder -i -
+mkdir -p $package_aar_folder
+echo "Files matching '$package_aar_file_name_pattern' :"
+cat $github_info_file | grep "browser_download_url.*$package_aar_file_name_pattern" | cut -d : -f 2,3 | tr -d \"
+cat $github_info_file | grep "browser_download_url.*$package_aar_file_name_pattern" | cut -d : -f 2,3 | tr -d \" | wget -q --show-progress -nc -P $package_aar_folder -i -
 
 echo ""
 echo "### DONE ###"
+echo ""
+
+echo "Files in '$package_aar_folder' :"
+ls $package_aar_folder
 echo ""

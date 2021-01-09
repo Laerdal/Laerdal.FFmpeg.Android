@@ -1,6 +1,48 @@
 #!/bin/bash
 
-# GITHUB INFORMATION
+usage(){
+    echo "usage: ./build.single.sh [-p|--package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]] [-r|--revision build_revision] [-v|--verbose]"
+    echo "parameters:"
+    echo "  -p | --package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]    REQUIRED, See https://github.com/tanersener/mobile-ffmpeg for more information"
+    echo "  -r | --revision [build_revision]                                          Sets the revision number, default = mdd.hMMSS"
+    echo "  -v | --verbose                                                            Enable verbose build details from msbuild tasks"
+    echo "  -h | --help                                                               Prints this message"
+    echo
+}
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -p | --package )        shift
+                                package_variant=$1
+                                ;;
+        -r | --revision )       shift
+                                build_revision=$1
+                                ;;
+        -v | --verbose )        verbose=1
+                                ;;
+        -h | --help )           usage
+                                exit
+                                ;;
+        * )                     echo
+                                echo "### Wrong parameter: $1 ###"
+                                echo
+                                usage
+                                exit 1
+    esac
+    shift
+done
+
+# Required variables
+if [ -z "$package_variant" ]; then
+    usage
+    exit 1
+fi
+
+if [ -z "$build_revision" ]; then
+    build_revision=`date +%-m%d.%-H%M%S`
+fi
+
+# find the latest ID here : https://api.github.com/repos/tanersener/mobile-ffmpeg/releases/latest
 github_repo_owner=tanersener
 github_repo=mobile-ffmpeg
 github_release_id=28895129
@@ -13,42 +55,6 @@ if [ ! -f "$github_info_file" ]; then
     github_info_file_url=https://api.github.com/repos/$github_repo_owner/$github_repo/releases/$github_release_id
     echo "Downloading $github_info_file_url to $github_info_file"
     curl -s $github_info_file_url > $github_info_file
-fi
-
-# VARIABLES
-usage(){
-    echo "### Wrong parameters ###"
-    echo "usage: ./build.local.sh [-p|--package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]] [-r|--revision build_revision] [-c|--clean-output]"
-    echo "see https://github.com/tanersener/mobile-ffmpeg for more information about the --package parameter"
-}
-
-clean_output=0
-package_variant=
-build_revision=`date +%-m%d.%-H%M%S`
-
-while [ "$1" != "" ]; do
-    case $1 in
-        -p | --package )        shift
-                                package_variant=$1
-                                ;;
-        -r | --revision )       shift
-                                build_revision=$1
-                                ;;
-        -c | --clean-output )   clean_output=1
-                                ;;
-        -h | --help )           usage
-                                exit
-                                ;;
-        * )                     usage
-                                exit 1
-    esac
-    shift
-done
-
-# Required variables
-if [ -z "$package_variant" ]; then
-    usage
-    exit 1
 fi
 
 echo ""
@@ -65,20 +71,6 @@ if [ -z "$github_short_version" ]; then
     cat $github_info_file
     exit 1
 fi
-
-# Static configuration
-nuget_project_folder="Laerdal.Xamarin.FFmpeg.Android"
-nuget_project_name="Laerdal.Xamarin.FFmpeg.Android"
-package_aar_folder="Laerdal.Xamarin.FFmpeg.Android.Source"
-
-# Calculated configuration
-nuget_jars_folder="$nuget_project_folder/Jars"
-nuget_output_folder="$nuget_project_name.Output"
-nuget_csproj_path="$nuget_project_folder/$nuget_project_name.csproj"
-
-package_aar_file_name="mobile-ffmpeg-$package_variant-$github_tag_name.aar"
-package_aar_file="$package_aar_folder/$package_aar_file_name"
-
 
 # see https://github.com/tanersener/mobile-ffmpeg for more information
 package_libraries="?"
@@ -101,11 +93,21 @@ nuget_variant="$package_variant"
 [ "$package_variant" = "min-gpl" ] && nuget_variant="Min.Gpl"
 [ "$package_variant" = "video" ] && nuget_variant="Video"
 
+# Static configuration
+nuget_project_folder="Laerdal.Xamarin.FFmpeg.Android"
+nuget_project_name="Laerdal.Xamarin.FFmpeg.Android"
+nuget_output_folder="$nuget_project_name.Output"
+nuget_csproj_path="$nuget_project_folder/$nuget_project_name.csproj"
 nuget_filename="$nuget_project_name.$nuget_variant.$build_version.nupkg"
 nuget_output_file="$nuget_output_folder/$nuget_filename"
 
+nuget_jars_folder="$nuget_project_folder/Jars"
+
+package_aar_folder="Laerdal.Xamarin.FFmpeg.Android.Source"
+package_aar_file_name="mobile-ffmpeg-$package_variant-$github_tag_name.aar"
+package_aar_file="$package_aar_folder/$package_aar_file_name"
+
 # Generates variables
-echo "clean_output = $clean_output"
 echo "build_version = $build_version"
 echo ""
 echo "github_repo_owner = $github_repo_owner"
@@ -128,18 +130,7 @@ echo "nuget_project_name = $nuget_project_name"
 echo "nuget_jars_folder = $nuget_jars_folder"
 echo "nuget_csproj_path = $nuget_csproj_path"
 echo "nuget_filename = $nuget_filename"
-
-if [ $clean_output = 1 ]; then
-    echo ""
-    echo "### CLEANING OUTPUT ###"
-    echo ""
-    old_nupkg="$nuget_output_folder/$nuget_project_name.$nuget_variant.*.nupkg"
-    old_snupkg="$nuget_output_folder/$nuget_project_name.$nuget_variant.*.snupkg"
-    rm -rf $old_nupkg
-    echo "Deleted : $old_nupkg"
-    rm -rf $old_snupkg
-    echo "Deleted : $old_snupkg"
-fi
+echo "nuget_output_file = $nuget_output_file"
 
 echo ""
 echo "### DOWNLOAD GITHUB RELEASE FILES ###"
@@ -156,7 +147,6 @@ if [ ! -f "$package_aar_file" ]; then
     exit 1
 fi
 
-
 echo ""
 echo "### COPY AAR FILE ###"
 echo ""
@@ -170,12 +160,27 @@ echo ""
 echo "### MSBUILD ###"
 echo ""
 
+msbuild_parameters=""
+if [ ! "$verbose" = "1" ]; then
+    msbuild_parameters="${msbuild_parameters} -nologo -verbosity:quiet"
+fi
+msbuild_parameters="${msbuild_parameters} -t:Rebuild"
+msbuild_parameters="${msbuild_parameters} -restore:True"
+msbuild_parameters="${msbuild_parameters} -p:Configuration=Release"
+msbuild_parameters="${msbuild_parameters} -p:NugetPackageVariantName=$nuget_variant"
+msbuild_parameters="${msbuild_parameters} -p:PackageVersion=$build_version"
+msbuild_parameters="${msbuild_parameters} -p:ExternalLibraries=\"$package_libraries\""
+echo "msbuild_parameters = $msbuild_parameters"
+echo ""
+
 rm -rf $nuget_project_folder/bin
 rm -rf $nuget_project_folder/obj
-msbuild $nuget_csproj_path -t:Rebuild -restore:True -p:Configuration=Release -p:NugetPackageVariantName=$nuget_variant -p:PackageVersion=$build_version -p:ExternalLibraries="$package_libraries"
+msbuild $nuget_csproj_path $msbuild_parameters
 
 if [ -f "$nuget_output_file" ]; then
-    # Cleaning
+    echo "Created :"
+    echo "  - $nuget_output_file"
+    echo ""
     rm -rf $nuget_project_folder/Jars/mobile-ffmpeg.aar
 else
     echo "Failed : Can't find '$nuget_output_file'"
