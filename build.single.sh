@@ -50,7 +50,7 @@ github_info_file="$github_repo_owner.$github_repo.$github_release_id.info.json"
 
 if [ ! -f "$github_info_file" ]; then
     echo ""
-    echo "### DOWNLOADING GITHUB INFORMATION ###"
+    echo "### DOWNLOAD GITHUB INFORMATION ###"
     echo ""
     github_info_file_url=https://api.github.com/repos/$github_repo_owner/$github_repo/releases/$github_release_id
     echo "Downloading $github_info_file_url to $github_info_file"
@@ -143,12 +143,12 @@ cat $github_info_file | grep "browser_download_url.*$package_aar_file_name" | cu
 
 wget_parameters="${wget_parameters} -q" # Quiet
 if [ "$verbose" = "1" ]; then
-    wget_parameters="${wget_parameters} --show-progress"
+    wget_parameters="${wget_parameters} --show-progress" # Force wget to display the progress bar.
 fi
-wget_parameters="${wget_parameters} -nc"
-wget_parameters="${wget_parameters} -P $package_aar_folder"
-wget_parameters="${wget_parameters} -i"
-wget_parameters="${wget_parameters} -"
+wget_parameters="${wget_parameters} -nc" # --no-clobber = keep existing file
+wget_parameters="${wget_parameters} -P $package_zip_folder" #--directory-prefix = Output directory
+wget_parameters="${wget_parameters} -i -" # Input (If you specify ‘-’ as file name, the URLs will be read from standard input.)
+
 echo ""
 echo "wget_parameters = $wget_parameters"
 cat $github_info_file | grep "browser_download_url.*$package_aar_file_name" | cut -d : -f 2,3 | tr -d \" | wget $wget_parameters
