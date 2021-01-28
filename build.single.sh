@@ -1,10 +1,11 @@
 #!/bin/bash
 
 usage(){
-    echo "usage: ./build.single.sh [-p|--package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]] [-r|--revision build_revision] [-v|--verbose]"
+    echo "usage: ./build.single.sh [-p|--package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]] [-r|--revision build_revision] [-c|--clean-output] [-v|--verbose] [-o|--output-path path]"
     echo "parameters:"
     echo "  -p | --package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]    REQUIRED, See https://github.com/tanersener/mobile-ffmpeg for more information"
     echo "  -r | --revision [build_revision]                                          Sets the revision number, default = mdd.hMMSS"
+    echo "  -c | --clean-output                                                       Cleans the output before building"
     echo "  -v | --verbose                                                            Enable verbose build details from msbuild tasks"
     echo "  -h | --help                                                               Prints this message"
     echo
@@ -14,6 +15,8 @@ while [ "$1" != "" ]; do
     case $1 in
         -p | --package )        shift
                                 package_variant=$1
+                                ;;
+        -c | --clean-output )   clean_output=1
                                 ;;
         -r | --revision )       shift
                                 build_revision=$1
@@ -99,11 +102,11 @@ nuget_project_name="Laerdal.Xamarin.FFmpeg.Android"
 nuget_output_folder="$nuget_project_name.Output"
 nuget_csproj_path="$nuget_project_folder/$nuget_project_name.csproj"
 nuget_filename="$nuget_project_name.$nuget_variant.$build_version.nupkg"
-nuget_output_file="$nuget_output_folder/$nuget_filename"
+nuget_output_file="$nuget_output_folder/$nuget_variant/$nuget_filename"
 
 nuget_jars_folder="$nuget_project_folder/Jars"
 
-package_aar_folder="Laerdal.Xamarin.FFmpeg.Android.Source"
+package_aar_folder="$nuget_project_name.Source"
 package_aar_file_name="mobile-ffmpeg-$package_variant-$github_tag_name.aar"
 package_aar_file="$package_aar_folder/$package_aar_file_name"
 
@@ -131,6 +134,14 @@ echo "nuget_jars_folder = $nuget_jars_folder"
 echo "nuget_csproj_path = $nuget_csproj_path"
 echo "nuget_filename = $nuget_filename"
 echo "nuget_output_file = $nuget_output_file"
+
+if [ "$clean_output" = "1" ]; then
+    echo
+    echo "### CLEAN OUTPUT ###"
+    echo
+    rm -rf $nuget_output_folder/$nuget_variant
+    echo "Deleted : $nuget_output_folder/$nuget_variant"
+fi
 
 echo ""
 echo "### DOWNLOAD GITHUB RELEASE FILES ###"
