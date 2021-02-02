@@ -157,7 +157,7 @@ if [ "$verbose" = "1" ]; then
     wget_parameters="${wget_parameters} --show-progress" # Force wget to display the progress bar.
 fi
 wget_parameters="${wget_parameters} -nc" # --no-clobber = keep existing file
-wget_parameters="${wget_parameters} -P $package_zip_folder" #--directory-prefix = Output directory
+wget_parameters="${wget_parameters} -P $package_aar_folder" #--directory-prefix = Output directory
 wget_parameters="${wget_parameters} -i -" # Input (If you specify ‘-’ as file name, the URLs will be read from standard input.)
 
 echo ""
@@ -173,10 +173,10 @@ echo ""
 echo "### COPY AAR FILE ###"
 echo ""
 
-echo "Copying $package_aar_file to $nuget_project_folder/Jars/mobile-ffmpeg.aar"
-rm -rf $nuget_project_folder/Jars/mobile-ffmpeg.aar
-mkdir -p $nuget_project_folder/Jars/
-cp $package_aar_file $nuget_project_folder/Jars/mobile-ffmpeg.aar
+echo "Copying $package_aar_file to $nuget_jars_folder/mobile-ffmpeg.aar"
+rm -rf $nuget_jars_folder/mobile-ffmpeg.aar
+mkdir -p $nuget_jars_folder
+cp $package_aar_file $nuget_jars_folder/mobile-ffmpeg.aar
 
 echo ""
 echo "### MSBUILD ###"

@@ -74,8 +74,8 @@
         <Reference Include="Mono.Android" />
     </ItemGroup>
     <ItemGroup>
-        <EmbeddedReferenceJar Include="Jars\*.jar" />
-        <LibraryProjectZip Include="Jars\*.aar" />
+    <!-- https://docs.microsoft.com/en-us/xamarin/android/platform/binding-java-library/#build-actions -->
+        <LibraryProjectZip Include="Jars\mobile-ffmpeg.aar" />
         <TransformFile Include="Transforms\*.xml" />
     </ItemGroup>
 </Project>
