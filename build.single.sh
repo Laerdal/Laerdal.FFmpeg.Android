@@ -113,8 +113,6 @@ echo "nuget_output_folder = $nuget_output_folder"
 echo "nuget_project_name = $nuget_project_name"
 echo "nuget_jars_folder = $nuget_jars_folder"
 echo "nuget_csproj_path = $nuget_csproj_path"
-echo "nuget_filename = $nuget_filename"
-echo "nuget_output_file = $nuget_output_file"
 
 if [ "$clean_output" = "1" ]; then
     echo

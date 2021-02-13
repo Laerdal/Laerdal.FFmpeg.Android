@@ -10,6 +10,7 @@
 
     <!-- ANDROID -->
     <PropertyGroup>
+        <!--suppress MsbuildTargetFrameworkTagInspection -->
         <TargetFrameworks>monoandroid10.0</TargetFrameworks>
         <IsBindingProject>true</IsBindingProject>
 
