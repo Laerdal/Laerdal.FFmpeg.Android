@@ -82,8 +82,8 @@ nuget_variant="$package_variant"
 [ "$package_variant" = "video" ] && nuget_variant="Video"
 
 # Static configuration
-nuget_project_folder="Laerdal.Xamarin.FFmpeg.Android"
-nuget_project_name="Laerdal.Xamarin.FFmpeg.Android"
+nuget_project_folder="Laerdal.FFmpeg.Android"
+nuget_project_name="Laerdal.FFmpeg.Android"
 nuget_output_folder="$nuget_project_name.Output"
 nuget_csproj_path="$nuget_project_folder/$nuget_project_name.csproj"
 
@@ -137,7 +137,7 @@ mkdir -p $package_aar_folder
 echo "Files matching '$package_aar_file_name' :"
 cat $github_info_file | grep "browser_download_url.*$package_aar_file_name" | cut -d : -f 2,3 | tr -d \"
 
-wget_parameters="${wget_parameters} -q" # Quiet
+wget_parameters="-q" # Quiet
 if [ "$verbose" = "1" ]; then
     wget_parameters="${wget_parameters} --show-progress" # Force wget to display the progress bar.
 fi

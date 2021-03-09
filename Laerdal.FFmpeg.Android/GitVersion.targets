@@ -7,7 +7,7 @@
         <UpdateVersionProperties>true</UpdateVersionProperties>
         <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
     </PropertyGroup>
-    <Target Name="PrintBuildInfo" AfterTargets="GetVersion">
+    <Target Name="PrintBuildInfo" AfterTargets="BeforeCompile">
         <Message Importance="High" Text="TargetFramework: $(TargetFramework)" />
         <Message Importance="High" Text="Configuration: $(Configuration)" />
         <Message Importance="High" Text="Platform: $(Platform)" />

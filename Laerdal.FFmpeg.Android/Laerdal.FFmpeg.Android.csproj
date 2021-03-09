@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 
     <Import Project="GitVersion.targets" />
 
@@ -24,12 +24,12 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <RootNamespace>Laerdal.Xamarin.FFmpeg.Android</RootNamespace>
+        <RootNamespace>Laerdal.FFmpeg.Android</RootNamespace>
 
-        <PackageId>Laerdal.Xamarin.FFmpeg.Android.$(NugetPackageVariantName)</PackageId>
+        <PackageId>Laerdal.FFmpeg.Android.$(NugetPackageVariantName)</PackageId>
         <PackageTags>Xamarin;FFmpeg;Android;$(NugetPackageVariantName)</PackageTags>
         <PackageDescription>Xamarin wrapper around mobile-ffmpeg for Android. External libraries: $(ExternalLibraries). Based on https://github.com/tanersener/mobile-ffmpeg</PackageDescription>
-        <PackageProjectUrl>https://github.com/Laerdal/Laerdal.Xamarin.FFmpeg.Android</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/Laerdal/Laerdal.FFmpeg.Android</PackageProjectUrl>
         <PackageVersion>1.0.0</PackageVersion>
         <PackageOutputPath>../$(RootNamespace).Output/$(NugetPackageVariantName)</PackageOutputPath>
         <PackageIcon>icon.png</PackageIcon>
@@ -41,15 +41,15 @@
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <AssemblyName>Laerdal.Xamarin.FFmpeg.Android</AssemblyName>
+        <AssemblyName>Laerdal.FFmpeg.Android</AssemblyName>
 
-        <Title>Laerdal.Xamarin.FFmpeg.Android.$(NugetPackageVariantName)</Title>
+        <Title>Laerdal.FFmpeg.Android.$(NugetPackageVariantName)</Title>
         <Summary>Xamarin FFmpeg Android $(NugetPackageVariantName)</Summary>
         <Description>Xamarin wrapper around mobile-ffmpeg for Android. External libraries: $(ExternalLibraries). Based on https://github.com/tanersener/mobile-ffmpeg</Description>
         <Authors>François Raminosona, Laerdal</Authors>
         <Owners>François Raminosona, Laerdal</Owners>
         <Copyright>François Raminosona, Laerdal</Copyright>
-        <RepositoryUrl>https://github.com/Laerdal/Laerdal.Xamarin.FFmpeg.Android.git</RepositoryUrl>
+        <RepositoryUrl>https://github.com/Laerdal/Laerdal.FFmpeg.Android.git</RepositoryUrl>
         <RepositoryBranch>$(GitVersion_BranchName)</RepositoryBranch>
         <RepositoryCommit>$(GitVersion_Sha)</RepositoryCommit>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -78,5 +78,17 @@
     <!-- https://docs.microsoft.com/en-us/xamarin/android/platform/binding-java-library/#build-actions -->
         <LibraryProjectZip Include="Jars\mobile-ffmpeg.aar" />
         <TransformFile Include="Transforms\*.xml" />
+    </ItemGroup>
+    
+    <!-- Documentation -->
+    <PropertyGroup>
+        <!-- warning CS1591: Missing XML comment for publicly visible type or member. -->
+        <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);CS1591</MSBuildWarningsAsMessages>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DocumentationFile>$(RootNamespace).doc.xml</DocumentationFile>
+        <DocumentationMarkdown>$(RootNamespace).doc.md</DocumentationMarkdown>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Vsxmd" Version="1.4.4" PrivateAssets="all" />
     </ItemGroup>
 </Project>
