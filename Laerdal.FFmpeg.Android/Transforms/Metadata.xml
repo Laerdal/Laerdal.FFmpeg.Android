@@ -1,7 +1,7 @@
 ﻿<metadata>
 
-  <attr path="/api/package[@name='com.arthenica.mobileffmpeg']" name="managedName">Laerdal.Xamarin.FFmpeg.Android</attr>
-  <attr path="/api/package[@name='com.arthenica.mobileffmpeg.util']" name="managedName">Laerdal.Xamarin.FFmpeg.Android.Util</attr>
+  <attr path="/api/package[@name='com.arthenica.mobileffmpeg']" name="managedName">Laerdal.FFmpeg.Android</attr>
+  <attr path="/api/package[@name='com.arthenica.mobileffmpeg.util']" name="managedName">Laerdal.FFmpeg.Android.Util</attr>
   
   
   <!-- warning BG8401: Skipping Com.Arthenica.Mobileffmpeg.Util.Pair.First, due to a duplicate field, method or nested type name. (Property) (Java type: com.arthenica.mobileffmpeg.util.Pair) -->

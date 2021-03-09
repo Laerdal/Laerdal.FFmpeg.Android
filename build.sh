@@ -1,13 +1,12 @@
 #!/bin/bash
 
-nuget_project_name="Laerdal.Xamarin.FFmpeg.Android"
+nuget_project_name="Laerdal.FFmpeg.Android"
 nuget_output_folder="$nuget_project_name.Output"
 
 usage(){
     echo "usage: ./build.sh [-p|--package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]] [-r|--revision build_revision] [-c|--clean-output] [-v|--verbose] [-o|--output path]"
     echo "parameters:"
     echo "  -p | --package [audio|full|full-gpl|https|https-gpl|min|min-gpl|video]    Multiple -p paramaters can be added. See https://github.com/tanersener/mobile-ffmpeg for more information"
-    echo "  -r | --revision [build_revision]                                          Sets the revision number, default = mdd.hMMSS"
     echo "  -c | --clean-output                                                       Cleans the output before building"
     echo "  -v | --verbose                                                            Enable verbose build details from msbuild tasks"
     echo "  -o | --output [path]                                                      Output path"
@@ -22,9 +21,6 @@ while [ "$1" != "" ]; do
                                 ;;
         -o | --output )         shift
                                 output_path=$1
-                                ;;
-        -r | --revision )       shift
-                                build_revision=$1
                                 ;;
         -c | --clean-output )   clean_output=1
                                 ;;
@@ -41,10 +37,6 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
-
-if [ -z "$build_revision" ]; then
-    build_revision=`date +%-m%d.%-H%M%S`
-fi
 
 if [ "$clean_output" = "1" ]; then
     echo ""

@@ -1,23 +1,23 @@
-# Laerdal.Xamarin.FFmpeg.Android
+# Laerdal.FFmpeg.Android
 
-> Xamarin.iOS package : <https://github.com/Laerdal/Laerdal.Xamarin.FFmpeg.iOS>
+> Xamarin.iOS package : <https://github.com/Laerdal/Laerdal.FFmpeg.iOS>
 >
-> Xamarin.Forms package : <https://github.com/Laerdal/Laerdal.Xamarin.FFmpeg>
+> Xamarin.Forms package : <https://github.com/Laerdal/Laerdal.FFmpeg>
 
 Xamarin binding library around @tanersener's Mobile-FFmpeg library.
 
 The native Android library can be found here: <https://github.com/tanersener/mobile-ffmpeg>
 
-| Mobile FFmpeg Package | Laerdal.Xamarin.FFmpeg.Android |
+| Mobile FFmpeg Package | Laerdal.FFmpeg.Android |
 |     :----    |     :----:    |
-| Audio | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Audio)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Audio/) |
-| Full | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Full)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Full/) |
-| Full.Gpl | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Full.Gpl)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Full.Gpl/) |
-| Https | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Https)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Https/) |
-| Https.Gpl | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Https.Gpl)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Https.Gpl/) |
-| Min | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Min)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Min/) |
-| Min.Gpl | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Min.Gpl)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Min.Gpl/) |
-| Video | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.Xamarin.FFmpeg.Android.Video)](https://www.nuget.org/packages/Laerdal.Xamarin.FFmpeg.Android.Video/) |
+| Audio | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Audio)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Audio/) |
+| Full | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Full)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Full/) |
+| Full.Gpl | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Full.Gpl)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Full.Gpl/) |
+| Https | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Https)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Https/) |
+| Https.Gpl | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Https.Gpl)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Https.Gpl/) |
+| Min | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Min)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Min/) |
+| Min.Gpl | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Min.Gpl)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Min.Gpl/) |
+| Video | [![NuGet Badge](https://buildstats.info/nuget/Laerdal.FFmpeg.Android.Video)](https://www.nuget.org/packages/Laerdal.FFmpeg.Android.Video/) |
 
 ## External libraries
 
@@ -34,9 +34,9 @@ The native Android library can be found here: <https://github.com/tanersener/mob
 
 ## Folder structure
 
-- Laerdal.Xamarin.FFmpeg.Android = Xamarin Java Binding Library project and nuget files
-- Laerdal.Xamarin.FFmpeg.Android.Source = Source files from Github release
-- Laerdal.Xamarin.FFmpeg.Android.Output = Build output from building *Laerdal.Xamarin.FFmpeg.Android*
+- Laerdal.FFmpeg.Android = Xamarin Java Binding Library project and nuget files
+- Laerdal.FFmpeg.Android.Source = Source files from Github release
+- Laerdal.FFmpeg.Android.Output = Build output from building *Laerdal.FFmpeg.Android*
 
 ## Local build
 
@@ -53,7 +53,7 @@ You'll need :
 #### 1) Checkout
 
 ```bash
-git clone https://github.com/Laerdal/Laerdal.Xamarin.FFmpeg.Android.git
+git clone https://github.com/Laerdal/Laerdal.FFmpeg.Android.git
 ```
 
 #### 2) Run build script
